@@ -1,14 +1,16 @@
 export default function test() {
-  const nums = (numbers: number[]): number[] => {
-    let lenNumbers = numbers.length;
-    for (let i = 0; i < lenNumbers; i ++) {
-      for (let j = 0; j < lenNumbers - 1 - i; j ++) {
-        if (numbers[j] > numbers[j + 1]) {
-          [numbers[j], numbers[j + 1]] = [numbers[j + 1], numbers[j]]
-        }
+  const selectionSort = (numbers: number[]): number[] => {
+    const lenNumbers = numbers.length
+
+    for (let i = 0; i < lenNumbers; i++) {
+      let minNumber = i;
+      for (let j = (i + 1);  j < lenNumbers; j++) {
+        if (numbers[minNumber] > numbers[j]) minNumber = j;
       }
+      [numbers[i], numbers[minNumber]] = [numbers[minNumber], numbers[i]]
     }
-    return numbers;
+    console.log(numbers)
+    return numbers
   }
-  nums([2, 5, 1, 8, 7, 3])
+  selectionSort([2, 5, 1, 8, 7, 3])
 }
