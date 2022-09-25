@@ -5,6 +5,10 @@
 // world.sayHello(root);
 
 
-import { bmiCalculate } from './basic'
+// import { bmiCalculate } from './basic'
+// import { authQuiz } from './basic'
+import { test } from './basic'
 
-bmiCalculate();
+// bmiCalculate();
+// authQuiz();
+test();

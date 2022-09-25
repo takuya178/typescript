@@ -1,9 +1,9 @@
-class Department {
-  name: string;
+// class Department {
+//   name: string;
 
-  constructor(n: string) {
-    this.name = n;
-  }
-}
+//   constructor(n: string) {
+//     this.name = n;
+//   }
+// }
 
-const accounting = new Department('Accounting');
+// const accounting = new Department('Accounting');
