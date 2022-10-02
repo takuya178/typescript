@@ -12,6 +12,8 @@ let cnt = 0;
 for (let h = 0; h < 24; h++) {
   for (let m = 0; m < 60; m++) {
     for(let s = 0; s < 60; s++) {
+      console.log("h: " + h)
+      console.log("m: " + m)
       if (check(h) + check(m) + check(s) === N) cnt++;
     }
   }
