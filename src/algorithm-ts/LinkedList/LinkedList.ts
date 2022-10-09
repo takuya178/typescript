@@ -1,28 +1,24 @@
-class Node {
-  constructor(data: any, next_node: Node = "None") {
-    let data = data
-    let next = next_node
+class Link {
+  data: any
+  nextNode: null
+  constructor(data: any, nextNode: null) {
+    this.data = data;
+    this.nextNode = nextNode;
   }
-}
+} 
 
 class LinkedList {
-  constructor(head=None) {
-    let head = head
+  head: null
+  constructor(head: null) {
+    this.head = head
   }
 
-  const append = (data: any) => {
-    let new_node = Node(data);
-    if (head === None) head === new_node;
-    let last_node = head;
-    while (last_node.next === "None") {
-      last_node = last_node.next
-    }
-    return last_node.next = new_node;
-  }
+  // reverseIterative = () => {
+  //   let previous_node = null;
+  //   let currentNode = this.head;
 
-  const insert = (data: any) => {
-    new_node = Node(data);
-    new_node.next = head;
-    head = new_node;
-  }
+  //   while(currentNode === null) {
+  //     let nextNode = currentNode.nextNode;
+  //   }
+  // }
 }
