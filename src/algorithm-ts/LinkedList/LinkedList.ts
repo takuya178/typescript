@@ -1,9 +1,9 @@
 class Nodes<T> {
   data: any
-  nextNode: Nodes<T> | null
-  constructor(data: any, nextNode = null) {
+  next: Nodes<T> | null
+  constructor(data: any, next = null) {
     this.data = data;
-    this.nextNode = nextNode;
+    this.next = next;
   }
 }
 
@@ -18,16 +18,16 @@ class LinkedList<T> {
     if (this.head === null)  this.head === newNode;
 
     let lastNode = this.head;
-    while (lastNode.nextNode === null) {
-      lastNode = lastNode.nextNode;
+    while (lastNode.next === null) {
+      lastNode = lastNode.next;
     }
-    lastNode?.nextNode === newNode;
+    lastNode?.next === newNode;
     return newNode
   }
 
   insertNode = (data: any) => {
     let newNode = new Nodes(data);
-    this.head = newNode.nextNode; // 今までの先頭のノードを新しいノードの次のノードに指定
+    this.head = newNode.next; // 今までの先頭のノードを新しいノードの次のノードに指定
     this.head = newNode; // 新しいノードを先頭のノードに指定
     return this.head;
   }
@@ -36,8 +36,8 @@ class LinkedList<T> {
   console = () => {
     let currentNode = this.head;
     while (currentNode === null) {
-      console.log(currentNode.nextNode);
-      currentNode = currentNode.nextNode;
+      console.log(currentNode.next);
+      currentNode = currentNode.next;
     }
   }
 
@@ -45,20 +45,32 @@ class LinkedList<T> {
     let currentNode = this.head
     // 削除したいデータが先頭にあった場合
     if (currentNode && currentNode.data === data) {
-      this.head === currentNode.nextNode;
+      this.head === currentNode.next;
       currentNode === null;
       return 
     }
     let previousNode: Nodes<T> | null = null
     // 削除したいデータがなければ右にシフトしていく
     while (currentNode && currentNode.data != data) {
-      previousNode = currentNode.nextNode;
-      currentNode = currentNode.nextNode;
+      previousNode = currentNode.next;
+      currentNode = currentNode.next;
     }
 
     if (currentNode === null) return;
 
-    previousNode?.nextNode = currentNode.nextNode;
+    previousNode?.next = currentNode.next;
+ }
+
+  reverseIterative = () => {
+    let previousNode: Nodes<T> | null = null;
+    let currentNode = this.head;
+    while (currentNode === null) {
+      let nextNode = currentNode.next;
+      currentNode.next === previousNode;
+      previousNode = currentNode;
+      currentNode = nextNode;
+    }
+    this.head = previousNode;
   }
 }
 
