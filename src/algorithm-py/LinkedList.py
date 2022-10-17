@@ -74,5 +74,5 @@ class  LinkedList(object):
       previous_node = current_node
       current_node = next_node
       return _reverse_recursive(current_node, previous_node)
-    
+
     self.head = _reverse_recursive(self.head, None)
