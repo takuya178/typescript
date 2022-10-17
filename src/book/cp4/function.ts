@@ -100,3 +100,52 @@ const map = <T, U>(array: T[], f: (item: T) => U): U[] => {
   }
   return result;
 } 
+map(['a', 'b', 'c'], _ => _ === 'a');
+
+
+
+type MyEvent<T> = {
+  target: T
+  type: string
+}
+
+type TimeEvent<T> = {
+  event: MyEvent<T>
+  from: Date
+  to: Date
+}
+
+
+
+// 制限付きポリモーフィズム
+// 「型Uは、少なくとも型Tでなければならない」という場合がある。これを「Uに上限を設ける」という。
+type TreeNode = {
+  value: string
+}
+type LeafNode = TreeNode & {
+  isLeaf: true
+}
+type InnerNode = TreeNode & {
+  children: [TreeNode] | [TreeNode, TreeNode]
+}
+
+let a: TreeNode = { value: 'a' }
+let b: LeafNode = { value: 'b', isLeaf: true }
+let c: InnerNode = { value: 'c', children: [b] }
+
+// node: TreeNodeとしていたら、ノードをマッピングして変換した後で情報を失う。
+// つまり、a1, b1, c1は全てただのTreeNodeになっていた。
+const mapNode = <T extends TreeNode>(
+  node: T,
+  f: (value: string) => string
+): T => {
+  return {
+    ...node,
+    value: f(node.value)
+  }
+}
+
+let a1 = mapNode(a, _ => _.toUpperCase());
+let b1 = mapNode(b, _ => _.toUpperCase());
+let c1 = mapNode(c, _ => _.toUpperCase());
+
