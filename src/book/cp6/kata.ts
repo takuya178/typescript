@@ -255,3 +255,19 @@ type Account3 = {
 
 
 
+// コンパニオンオブジェクトパターン
+type Units = 'EUR' | 'GBP' | 'JPY' | 'USD'
+
+export type Currency = {
+  unit: Units
+  value: number
+}
+
+export let Currency = {
+  from(value: number, unit: Units): Currency {
+    return {
+      unit: unit,
+      value
+    }
+  }
+}
