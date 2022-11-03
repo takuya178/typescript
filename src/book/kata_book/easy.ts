@@ -45,3 +45,26 @@ type TestOb = {
 
 
 
+type ObjectTest = {
+  [key in string]: number
+}
+
+
+const Testob = {
+  name : 'test ',
+  value : 2 ,
+} as const
+type TestobKye = keyof typeof Testob;
+
+
+
+const Test2Ob = {
+  name : 'test ',
+  value : 2 ,
+} as const
+
+type Test29b = typeof Test2Ob[keyof typeof Test2Ob];
+
+const TestArray = ['one ', 'two ', 'three '] as const
+type TestArrayT = typeof TestArray[number]
+
