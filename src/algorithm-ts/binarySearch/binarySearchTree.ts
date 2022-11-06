@@ -21,6 +21,26 @@ const insert = (node: Binaty | null, value: number): Binaty | null => {
   return node
 }
 
+const inorder = (node: Binaty | null) => {
+  if (node) {
+    inorder(node.left);
+    console.log(node.value);
+    inorder(node.right);
+  } 
+}
+
+const search = (node: Binaty | null, value: number): any => {
+  if (!node) return false;
+
+  if (node.value === value) {
+    return true;
+  } else if (node.value > value) {
+    return search(node.left, value);
+  } else if (node.value < value) {
+    return search(node.right, value);
+  }
+}
+
 let root = null
 root = insert(root, 3)
 root = insert(root, 6)
