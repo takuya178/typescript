@@ -6,4 +6,10 @@
 
 import { gitHub } from './basic'
 
-gitHub()
+gitHub(
+// import { bmiCalculate } from './basic'
+// import { authQuiz } from './basic'
+import { test } from './basic'
+
+// bmiCalculate();
+// authQuiz();
