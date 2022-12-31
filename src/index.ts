@@ -4,7 +4,6 @@
 // const world = new World("Hello World!!!");
 // world.sayHello(root);
 
+import { gitHub } from './basic'
 
-import { bmiCalculate } from './basic'
-
-bmiCalculate();
+gitHub()
