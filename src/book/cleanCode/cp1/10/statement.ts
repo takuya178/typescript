@@ -1,8 +1,12 @@
+// 全体の処理を2つのフェーズに分ける。前半フェーズでは請求書出力のためのデータを計算
+// 後半フェーズではデータをプレーンテキストやHTMLに出力する。
 const statement = (invoice, plays) => {
-  let totalAmount: number = 0;
-  let volimeCredits: number = 0;
+  const statementData = {};
+  return renderPlainText(statementData, invoice, plays);
+}
+
+const renderPlainText = (data, invoice, plays) => {
   let result:string = "statement for ${invoice.customer}"
-  // const format = new Intl.NumberFormat("en-US", { stype: "currency", currency: "USD", minimumFractionDigits: 2 }).format;
 
   for (let perf of invoice.performances) {
     volimeCredits += volumeCreditsFor(perf);
@@ -47,10 +51,6 @@ const volumeCreditsFor = (aPerformance) => {
   return result;
 }
 
-// 一時変数は問題のものなので、置き換える。
-// formatという名前も危険。
-// 文字列のテンプレート内の小さなスコープで使われているだけで、強調すべきは金額のフォーマットをおこなっていることなので、それを明確にする。
-// const format = (aNumber) => {
 const usd = (aNumber) => {
   return new Intl.NumberFormat("en-US", { stype: "currency", currency: "USD", minimumFractionDigits: aNumber/100 }).format;
 }
