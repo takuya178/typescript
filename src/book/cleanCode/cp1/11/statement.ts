@@ -1,13 +1,16 @@
-// 全体の処理を2つのフェーズに分ける。前半フェーズでは請求書出力のためのデータを計算
-// 後半フェーズではデータをプレーンテキストやHTMLに出力する。
+// customerをinvoiceから取り出して、中間オブジェクトに加える。
+// 計算処理を全てstatement関数に移動し、renderPlainTextは引数dataで渡されたデータを加工するだけにできる。
+// 同様にperformanceも中間オブジェクトに追加する。これによりrenderPlainTextのinvoiceパラメータが不要になる。
 const statement = (invoice, plays) => {
   const statementData = {};
-  return renderPlainText(statementData, invoice, plays);
+  statementData.customer = invoice.customer;
+  statementData.performances = invoice.peformances;
+  return renderPlainText(statementData, plays);
 }
 
-const renderPlainText = (data, invoice, plays) => {
-  let result:string = "statement for ${invoice.customer}"
-  for (let perf of invoice.performances) {
+const renderPlainText = (data, plays) => {
+  let result:string = `statement for ${data.customer}`
+  for (let perf of data.performances) {
     result += `${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)`;
   }
   result += `Amount owed is ${usd(totalAmount)}`
@@ -17,9 +20,17 @@ const renderPlainText = (data, invoice, plays) => {
 
 const totalVolumeCredits = () => {
   let result = 0;
-  for (let perf of invoice.performances) {
+  for (let perf of data.performances) {
     result += volumeCreditsFor(perf);
   }
+}
+
+const totalAmount = () => {
+  let result = 0;
+  for (let perf of DataTransfer.peformances) {
+    result += amountFor(perf);
+  }
+  return result;
 }
 
 const amountFor = (aPerformance) => {
